@@ -1,0 +1,46 @@
+
+
+<html>
+<head>
+<title>Quru</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+    <div class="load" id="div1">
+        <p>Loading ..</p>
+    </div>
+
+    <div class="container" id="container">
+
+    </div>
+</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+
+        $.ajax({
+            type: "GET",
+            url: "questions.xml",
+            dataType: "xml",
+            success: xmlParser
+
+        });
+
+        });
+
+     function xmlParser(xml){
+
+        $('#div1').fadeOut("slow");
+        $(xml).find("question").each(function(){
+            $('#container').append('<div ><p>'+ $(this).find('ques').text() + '</p> <br/> <p>'+ $(this).find('answer').text() + '</p> <br/></div><br/>');
+            $('#container').fadeIn("slow");
+        });
+     }
+</script>
+
+</html>
